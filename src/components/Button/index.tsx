@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 
+import IconWrapper from "./components/IconWrapper";
+
 enum ButtonType {
   default = "default",
   primary = "primary",
@@ -33,7 +35,7 @@ function Button(props: ButtonProps) {
 
   const typeClassName = useMemo(() => {
     const baseStyles =
-      "h-8 w-fit px-5 py-2 text-center text-xs rounded-xl hover:ease-in-out duration-300";
+      "min-h-8 gap-1 inline-flex flex-auto items-center w-fit px-5 py-2 text-center text-xs rounded-xl hover:ease-in-out duration-300";
 
     const defaultBasicStyles = "border border-secondary bg-white text-text";
     const defaultHoverStyles = "hover:text-primary hover:border-primary";
@@ -85,7 +87,12 @@ function Button(props: ButtonProps) {
     console.log("button props: ", props);
   }, [props]);
 
-  return <button className={`${className} ${typeClassName}`}>{text}</button>;
+  return (
+    <button className={`${className} ${typeClassName}`}>
+      {icon && <IconWrapper>{icon}</IconWrapper>}
+      {text}
+    </button>
+  );
 }
 
 export default Button;
