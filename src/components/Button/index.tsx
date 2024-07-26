@@ -13,11 +13,10 @@ interface ButtonProps {
   className?: string;
   text?: string;
   type?:
-    | ButtonType.default
-    | ButtonType.primary
-    | ButtonType.text
-    | ButtonType.link
-    | string;
+    | `${ButtonType.default}`
+    | `${ButtonType.primary}`
+    | `${ButtonType.text}`
+    | `${ButtonType.link}`;
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
@@ -40,12 +39,12 @@ function Button(props: ButtonProps) {
     const defaultBasicStyles = "border border-secondary bg-white text-text";
     const defaultHoverStyles = "hover:text-primary hover:border-primary";
     const defaultDisabledStyles =
-      "!bg-secondary !bg-opacity-30 border-secondary text-text text-opacity-40 cursor-not-allowed";
+      "[&]:bg-secondary [&]:bg-opacity-30 border-secondary text-text text-opacity-40 cursor-not-allowed";
 
     const primaryBasicStyles = "bg-primary text-white";
     const primaryHoverStyles = "hover:opacity-80";
     const primaryDisabledStyles =
-      "bg-secondary bg-opacity-30 border border-secondary !text-text !text-opacity-40 cursor-not-allowed";
+      "bg-secondary bg-opacity-30 border border-secondary [&]:text-text [&]:text-opacity-40 cursor-not-allowed";
 
     const textBasicStyles = "text-text";
     const textHoverStyles = "hover:bg-secondary";
