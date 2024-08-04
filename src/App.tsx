@@ -1,11 +1,9 @@
-import { Button } from "@/components";
+import React from "react";
+
+import { ButtonDemo } from "@/demo";
 
 function App() {
-  return (
-    <>
-      <Button text="i'm button" type="link" />
-    </>
-  );
+  return <ButtonDemo />;
 }
 
 export default App;
