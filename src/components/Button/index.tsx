@@ -13,11 +13,7 @@ enum ButtonType {
 interface ButtonProps {
   className?: string;
   text?: string;
-  type?:
-    | `${ButtonType.default}`
-    | `${ButtonType.primary}`
-    | `${ButtonType.text}`
-    | `${ButtonType.link}`;
+  type?: "default" | "primary" | "text" | "link";
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
