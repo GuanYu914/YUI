@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import IconWrapper from "./components/IconWrapper";
+import LoadingIcon from "./components/loadingIcon";
 
 enum ButtonType {
   default = "default",
@@ -12,11 +13,7 @@ enum ButtonType {
 interface ButtonProps {
   className?: string;
   text?: string;
-  type?:
-    | `${ButtonType.default}`
-    | `${ButtonType.primary}`
-    | `${ButtonType.text}`
-    | `${ButtonType.link}`;
+  type?: "default" | "primary" | "text" | "link";
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
@@ -39,57 +36,95 @@ function Button(props: ButtonProps) {
     const defaultBasicStyles = "border border-secondary bg-white text-text";
     const defaultHoverStyles = "hover:text-primary hover:border-primary";
     const defaultDisabledStyles =
-      "[&]:bg-secondary [&]:bg-opacity-30 border-secondary text-text text-opacity-40 cursor-not-allowed";
+      "[&]:bg-secondary/30 border-secondary text-text/40 cursor-not-allowed";
+    const defaultLoadingStyles = " text-text/40";
 
     const primaryBasicStyles = "bg-primary text-white";
     const primaryHoverStyles = "hover:opacity-80";
     const primaryDisabledStyles =
-      "bg-secondary bg-opacity-30 border border-secondary [&]:text-text [&]:text-opacity-40 cursor-not-allowed";
+      "bg-secondary/30 border border-secondary [&]:text-text/40 cursor-not-allowed";
+    const primaryLoadingStyles = "bg-primary/80";
 
     const textBasicStyles = "text-text";
     const textHoverStyles = "hover:bg-secondary";
-    const textDisabledStyles = "text-opacity-40 cursor-not-allowed";
+    const textDisabledStyles = "text-text/40 cursor-not-allowed";
+    const textLoadingStyles = "text-text/40";
 
     const linkBasicStyles = "text-primary hover:opacity-80";
     const linkHoverStyles = "hover:opacity-80";
-    const linkDisabledStyles = "text-opacity-40 text-text cursor-not-allowed";
+    const linkDisabledStyles = "text-text/40 cursor-not-allowed";
+    const linkLoadingStyles = "text-primary/80";
 
-    if (type === ButtonType.default && !disabled) {
-      return [baseStyles, defaultBasicStyles, defaultHoverStyles].join(" ");
+    if (type === ButtonType.default) {
+      let styles = [baseStyles, defaultBasicStyles, defaultHoverStyles];
+
+      if (loading) {
+        styles = styles.concat(defaultLoadingStyles);
+      }
+      if (disabled) {
+        styles = styles
+          .concat(defaultDisabledStyles)
+          .filter((style) => !style.includes(defaultHoverStyles));
+      }
+
+      return styles.join(" ");
     }
-    if (type === ButtonType.default && disabled) {
-      return [baseStyles, defaultBasicStyles, defaultDisabledStyles].join(" ");
+    if (type === ButtonType.primary) {
+      let styles = [baseStyles, primaryBasicStyles, primaryHoverStyles];
+
+      if (loading) {
+        styles = styles.concat(primaryLoadingStyles);
+      }
+      if (disabled) {
+        styles = styles
+          .concat(primaryDisabledStyles)
+          .filter((style) => !style.includes(primaryHoverStyles));
+      }
+
+      return styles.join(" ");
     }
-    if (type === ButtonType.primary && !disabled) {
-      return [baseStyles, primaryBasicStyles, primaryHoverStyles].join(" ");
+    if (type === ButtonType.text) {
+      let styles = [baseStyles, textBasicStyles, textHoverStyles];
+
+      if (loading) {
+        styles = styles.concat(textLoadingStyles);
+      }
+      if (disabled) {
+        styles = styles
+          .concat(textDisabledStyles)
+          .filter((style) => !style.includes(textHoverStyles));
+      }
+
+      return styles.join(" ");
     }
-    if (type === ButtonType.primary && disabled) {
-      return [baseStyles, primaryBasicStyles, primaryDisabledStyles].join(" ");
-    }
-    if (type === ButtonType.text && !disabled) {
-      return [baseStyles, textBasicStyles, textHoverStyles].join(" ");
-    }
-    if (type === ButtonType.text && disabled) {
-      return [baseStyles, textBasicStyles, textDisabledStyles].join(" ");
-    }
-    if (type === ButtonType.link && !disabled) {
-      return [baseStyles, linkBasicStyles, linkHoverStyles].join(" ");
-    }
-    if (type === ButtonType.link && disabled) {
-      return [baseStyles, linkBasicStyles, linkDisabledStyles].join(" ");
+    if (type === ButtonType.link) {
+      let styles = [baseStyles, linkBasicStyles, linkHoverStyles];
+
+      if (loading) {
+        styles = styles.concat(linkLoadingStyles);
+      }
+      if (disabled) {
+        styles = styles
+          .concat(linkDisabledStyles)
+          .filter((style) => !style.includes(linkHoverStyles));
+      }
+
+      return styles.join(" ");
     }
 
     return [baseStyles, defaultBasicStyles, defaultHoverStyles].join(" ");
-  }, [type, disabled]);
+  }, [type, loading, disabled]);
 
-  useEffect(() => {
-    console.log("button props: ", props);
-  }, [props]);
+  const colorOfLoadingIcon = useMemo(
+    () => (type === ButtonType.primary && !disabled ? "white" : "primary"),
+    [type, disabled],
+  );
 
   return (
     <button className={`${className} ${typeClassName}`}>
       {icon && <IconWrapper>{icon}</IconWrapper>}
       {text}
+      {loading && <LoadingIcon color={colorOfLoadingIcon} />}
     </button>
   );
 }
