@@ -8,19 +8,28 @@
     --color-secondary: 218 218 218;
     --color-text: 56 56 56;
     --color-white: 255 255 255;
-    --loader-background: radial-gradient(
+    --primary-loader-background: radial-gradient(
       farthest-side,
-      transparent calc(95% - 3px),
-      rgb(var(--color-primary)) calc(100% - 3px) 98%,
-      transparent 101%
-    ) no-repeat
+      rgb(var(--color-primary)) 80%,
+      transparent 0%
+    ) no-repeat;
+    --white-loader-background: radial-gradient(
+      farthest-side,
+      rgb(var(--color-white)) 80%,
+      transparent 0%
+    ) no-repeat;
   }
 }
 
 @layer components {
-  .loader {
+  .primary-loader {
     @apply 
-      w-14 h-10 !bg-[length:14px_14px];
-      background: var(--loader-background), var(--loader-background), var(--loader-background) 
+      w-8 h-4 !bg-[length:8px_8px];
+      background: var(--primary-loader-background), var(--primary-loader-background), var(--primary-loader-background) 
+  }
+  .white-loader {
+    @apply 
+      w-8 h-4 !bg-[length:8px_8px];
+      background: var(--white-loader-background), var(--white-loader-background), var(--white-loader-background) 
   }
 }
