@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "@storybook/test";
 
 import react_icon from "@/assets/react.svg";
 import flower_icon from "@/assets/flower-svgrepo-com.svg";
@@ -31,6 +32,7 @@ export const Default: Story = {
   args: {
     text: "default button🥳",
     type: "default",
+    onClick: fn(),
   },
 };
 
@@ -39,6 +41,7 @@ export const Primary: Story = {
   args: {
     text: "primary button🥳",
     type: "primary",
+    onClick: fn(),
   },
 };
 
@@ -47,6 +50,7 @@ export const Text: Story = {
   args: {
     text: "text button🥳",
     type: "text",
+    onClick: fn(),
   },
 };
 
@@ -55,6 +59,7 @@ export const Link: Story = {
   args: {
     text: "link button🥳",
     type: "link",
+    onClick: fn(),
   },
 };
 
