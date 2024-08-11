@@ -7,21 +7,43 @@ function ButtonDemo() {
   return (
     <div>
       <div>
-        <Button text="default" type="default" />
+        <Button
+          text="default"
+          type="default"
+          onClick={() => console.log("onClick")}
+        />
         <Button
           text="default"
           type="default"
           icon={<img src={react} width={10} height={10} alt="react-icon" />}
+          onClick={() => console.log("onClick")}
         />
-        <Button text="default" type="default" loading />
-        <Button text="default" type="default" disabled />
-        <Button text="default" type="default" disabled loading />
+        <Button
+          text="default"
+          type="default"
+          loading
+          onClick={() => console.log("b")}
+        />
+        <Button
+          text="default"
+          type="default"
+          disabled
+          onClick={() => console.log("c")}
+        />
+        <Button
+          text="default"
+          type="default"
+          disabled
+          loading
+          onClick={() => console.log("onClick")}
+        />
         <Button
           text="default"
           type="default"
           icon={<img src={react} width={10} height={10} alt="react-icon" />}
           disabled
           loading
+          onClick={() => console.log("onClick")}
         />
       </div>
       <div>

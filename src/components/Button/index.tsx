@@ -17,6 +17,7 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   icon?: React.ReactNode;
+  onClick?: () => void;
 }
 
 function Button(props: ButtonProps) {
@@ -27,6 +28,7 @@ function Button(props: ButtonProps) {
     disabled = false,
     loading = false,
     icon = null,
+    onClick = null,
   } = props;
 
   const typeClassName = useMemo(() => {
@@ -37,23 +39,23 @@ function Button(props: ButtonProps) {
     const defaultHoverStyles = "hover:text-primary hover:border-primary";
     const defaultDisabledStyles =
       "[&]:bg-secondary/30 border-secondary text-text/40 cursor-not-allowed";
-    const defaultLoadingStyles = " text-text/40";
+    const defaultLoadingStyles = " text-text/40 cursor-not-allowed";
 
     const primaryBasicStyles = "bg-primary text-white";
     const primaryHoverStyles = "hover:opacity-80";
     const primaryDisabledStyles =
       "bg-secondary/30 border border-secondary [&]:text-text/40 cursor-not-allowed";
-    const primaryLoadingStyles = "bg-primary/80";
+    const primaryLoadingStyles = "bg-primary/80 cursor-not-allowed";
 
     const textBasicStyles = "text-text";
     const textHoverStyles = "hover:bg-secondary";
     const textDisabledStyles = "text-text/40 cursor-not-allowed";
-    const textLoadingStyles = "text-text/40";
+    const textLoadingStyles = "text-text/40 cursor-not-allowed";
 
     const linkBasicStyles = "text-primary hover:opacity-80";
     const linkHoverStyles = "hover:opacity-80";
     const linkDisabledStyles = "text-text/40 cursor-not-allowed";
-    const linkLoadingStyles = "text-primary/80";
+    const linkLoadingStyles = "text-primary/80 cursor-not-allowed";
 
     if (type === ButtonType.default) {
       let styles = [baseStyles, defaultBasicStyles, defaultHoverStyles];
@@ -120,8 +122,17 @@ function Button(props: ButtonProps) {
     [type, disabled],
   );
 
+  const handleClick = () => {
+    if (disabled) return;
+    if (loading) return;
+
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <button className={`${className} ${typeClassName}`}>
+    <button className={`${className} ${typeClassName}`} onClick={handleClick}>
       {icon && <IconWrapper>{icon}</IconWrapper>}
       {text}
       {loading && <LoadingIcon color={colorOfLoadingIcon} />}
