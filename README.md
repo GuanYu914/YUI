@@ -12,7 +12,9 @@ Currently, two official plugins are available:
 I made a design files to this UI System, check [here](https://www.figma.com/design/bcsQ0UZR7qNWhkbhIeqvAk/YUI---Design?node-id=8-4&t=Z3uRY7IWrWav3X4a-1)
 
 `npm run dev` to start development
+
 `npm run storybook` to see storybook documents in development
+
 `npm run storybook` to generate static storybook document, you can deploy this folder on production server
 
 ## Demo
