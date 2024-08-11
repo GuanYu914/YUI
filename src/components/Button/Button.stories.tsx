@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import react_icon from "@/assets/react.svg";
+import flower_icon from "@/assets/flower-svgrepo-com.svg";
 
 import Button from ".";
 
 const supportIcons = {
-  "react icon": (
-    <img src={react_icon} width={20} height={20} alt="react-icon" />
+  "flower icon": (
+    <img src={flower_icon} width={20} height={20} alt="flower-icon" />
   ),
 };
 
@@ -28,7 +29,7 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
   name: "default type",
   args: {
-    text: "default button",
+    text: "default button🥳",
     type: "default",
   },
 };
@@ -36,7 +37,7 @@ export const Default: Story = {
 export const Primary: Story = {
   name: "primary type",
   args: {
-    text: "primary button",
+    text: "primary button🥳",
     type: "primary",
   },
 };
@@ -44,7 +45,7 @@ export const Primary: Story = {
 export const Text: Story = {
   name: "text type",
   args: {
-    text: "text button",
+    text: "text button🥳",
     type: "text",
   },
 };
@@ -52,7 +53,7 @@ export const Text: Story = {
 export const Link: Story = {
   name: "link type",
   args: {
-    text: "link button",
+    text: "link button🥳",
     type: "link",
   },
 };
