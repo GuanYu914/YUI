@@ -36,8 +36,10 @@ function RadioGroup(props: RadioGroupProps) {
         if (isValidElement(child)) {
           return cloneElement(child, {
             ...child.props,
+            mode: "group",
             checked: child.props.value === value,
             disabled,
+            groupValue: value,
             onChange: handleChange,
           });
         }
