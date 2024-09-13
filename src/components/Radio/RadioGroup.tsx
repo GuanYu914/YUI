@@ -7,19 +7,19 @@ import React, {
 } from "react";
 import { RadioProps } from ".";
 
-interface RadioGroupProps {
+interface RadioGroupProps<T> {
   className?: string;
   disabled?: boolean;
-  value?: any;
-  children?: ReactElement<RadioProps>[];
-  onChange?: (value: any) => void;
+  value?: T;
+  children?: ReactElement<RadioProps<T>>[];
+  onChange?: (value: T | undefined) => void;
 }
 
-function RadioGroup(props: RadioGroupProps) {
+function RadioGroup<K>(props: RadioGroupProps<K>) {
   const {
     className = "",
     disabled = false,
-    value,
+    value = undefined,
     children = null,
     onChange = null,
   } = props;

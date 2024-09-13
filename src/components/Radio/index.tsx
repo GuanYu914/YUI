@@ -3,25 +3,25 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import RadioGroup from "./RadioGroup";
 
-export interface RadioProps {
+export interface RadioProps<T> {
   className?: string;
   mode?: "default" | "group";
   checked?: boolean;
   disabled?: boolean;
   groupValue?: any;
-  value?: any;
+  value?: T;
   children?: React.ReactNode;
-  onChange?: (value: any) => void;
+  onChange?: (value: T | undefined) => void;
 }
 
-function Radio(props: RadioProps) {
+function Radio<K>(props: RadioProps<K>) {
   const {
     className = "",
     mode = "default",
     checked = false,
     disabled = false,
     groupValue,
-    value = null,
+    value = undefined,
     children = null,
     onChange = null,
   } = props;
