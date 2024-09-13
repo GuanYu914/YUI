@@ -8,7 +8,14 @@ function RadioDemo() {
   return (
     <>
       {/* Radio Group*/}
-      <RadioGroup value={value} onChange={(v) => setValue(v)}>
+      <RadioGroup
+        value={value}
+        onChange={(v) => {
+          if (v) {
+            setValue(v);
+          }
+        }}
+      >
         <Radio value="1">Option 1</Radio>
         <Radio value="2" checked>
           Option 2

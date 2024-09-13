@@ -3,21 +3,25 @@ import React, { useEffect, useMemo, useState } from "react";
 
 import RadioGroup from "./RadioGroup";
 
-export interface RadioProps {
+export interface RadioProps<T> {
   className?: string;
+  mode?: "default" | "group";
   checked?: boolean;
   disabled?: boolean;
-  value?: any;
+  groupValue?: any;
+  value?: T;
   children?: React.ReactNode;
-  onChange?: (value: any) => void;
+  onChange?: (value: T | undefined) => void;
 }
 
-function Radio(props: RadioProps) {
+function Radio<K>(props: RadioProps<K>) {
   const {
     className = "",
+    mode = "default",
     checked = false,
     disabled = false,
-    value = null,
+    groupValue,
+    value = undefined,
     children = null,
     onChange = null,
   } = props;
@@ -71,6 +75,17 @@ function Radio(props: RadioProps) {
   useEffect(() => {
     _setChecked(checked);
   }, [checked]);
+
+  // NOTE: 如果是 group 模式，且 groupValue 沒有值，則取消選取
+  // NOTE: 如果是 group 模式，且 groupValue 有值，則檢查是否與 value 相同，若不同則取消選取
+  useEffect(() => {
+    if (mode === "group" && !groupValue) {
+      _setChecked(false);
+    }
+    if (mode === "group" && groupValue !== value) {
+      _setChecked(false);
+    }
+  }, [_checked]);
 
   return (
     <div className="flex items-center gap-2">
