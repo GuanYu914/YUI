@@ -31,7 +31,7 @@ function Button(props: ButtonProps) {
     onClick = null,
   } = props;
 
-  const typeClassName = useMemo(() => {
+  const buttonClassName = useMemo(() => {
     const baseStyles =
       "min-h-8 gap-1 inline-flex flex-auto items-center w-fit px-5 py-2 text-center text-xs rounded-xl hover:ease-in-out duration-300";
 
@@ -132,7 +132,7 @@ function Button(props: ButtonProps) {
   };
 
   return (
-    <button className={`${className} ${typeClassName}`} onClick={handleClick}>
+    <button className={`${className} ${buttonClassName}`} onClick={handleClick}>
       {icon && <IconWrapper>{icon}</IconWrapper>}
       {text}
       {loading && <LoadingIcon color={colorOfLoadingIcon} />}

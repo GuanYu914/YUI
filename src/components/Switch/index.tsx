@@ -33,7 +33,7 @@ function Switch(props: SwitchProps) {
   const clickBefore = useRef(false);
   const initWithOffset = useRef(false);
 
-  const buttonStyles = useMemo(() => {
+  const buttonClassName = useMemo(() => {
     let styles =
       "min-w-16 min-h-9 rounded-2xl px-2 py-1 overflow-hidden text-white";
 
@@ -54,8 +54,6 @@ function Switch(props: SwitchProps) {
 
     return styles;
   }, [_checked, disabled]);
-
-  const wrapperStyles = "flex items-center transition-all duration-300";
 
   // NOTE: 處理點擊事件，並根據開關的狀態，移動開關的位置
   const handleClick = () => {
@@ -152,10 +150,13 @@ function Switch(props: SwitchProps) {
   return (
     <button
       ref={buttonRef}
-      className={`${className} ${buttonStyles}`}
+      className={`${className} ${buttonClassName}`}
       onClick={handleClick}
     >
-      <div ref={wrapperRef} className={wrapperStyles}>
+      <div
+        ref={wrapperRef}
+        className="flex items-center transition-all duration-300"
+      >
         {checkedChildren && (
           <Label ref={checkedLabelRef} className={"pr-2"}>
             {checkedChildren}

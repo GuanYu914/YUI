@@ -1,10 +1,9 @@
 import React from "react";
 
-import { ButtonDemo } from "@/demo";
-import { SwitchDemo } from "@/demo";
+import { ButtonDemo, SwitchDemo, RadioDemo } from "@/demo";
 
 function App() {
-  return <SwitchDemo />;
+  return <RadioDemo />;
 }
 
 export default App;
