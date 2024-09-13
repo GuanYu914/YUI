@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useMemo, useState } from "react";
 
-interface RadioProps {
+import RadioGroup from "./RadioGroup";
+
+export interface RadioProps {
   className?: string;
   checked?: boolean;
   disabled?: boolean;
+  value?: any;
   children?: React.ReactNode;
-  onChange?: (checked: boolean) => void;
+  onChange?: (value: any) => void;
 }
 
-// TODO: 加上 Radio Group 的功能
 function Radio(props: RadioProps) {
   const {
     className = "",
     checked = false,
     disabled = false,
+    value = null,
     children = null,
     onChange = null,
   } = props;
@@ -49,7 +53,7 @@ function Radio(props: RadioProps) {
     _setChecked(!_checked);
 
     if (onChange) {
-      onChange(!_checked);
+      onChange(value);
     }
   };
 
@@ -60,7 +64,7 @@ function Radio(props: RadioProps) {
     _setChecked(!_checked);
 
     if (onChange) {
-      onChange(!_checked);
+      onChange(value);
     }
   };
 
@@ -86,3 +90,4 @@ function Radio(props: RadioProps) {
 }
 
 export default Radio;
+export { RadioGroup };
