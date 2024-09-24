@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useMemo, useState } from "react";
 
+import Option from "../Option";
 import RadioGroup from "./RadioGroup";
 
 export interface RadioProps<T> {
@@ -88,19 +89,18 @@ function Radio<K>(props: RadioProps<K>) {
   }, [_checked]);
 
   return (
-    <div className="flex items-center gap-2">
-      <input
-        id="radio"
-        className={`${className} ${inputClassName}`}
-        checked={_checked}
-        disabled={disabled}
-        type="radio"
-        onChange={handleInputChange}
-      />
-      <label className={labelClassName} onClick={handleClickLabel}>
-        {children}
-      </label>
-    </div>
+    <Option
+      className={className}
+      inputClassName={inputClassName}
+      labelClassName={labelClassName}
+      inputType="radio"
+      checked={_checked}
+      disabled={disabled}
+      onChangeInput={handleInputChange}
+      onClickLabel={handleClickLabel}
+    >
+      {children}
+    </Option>
   );
 }
 
