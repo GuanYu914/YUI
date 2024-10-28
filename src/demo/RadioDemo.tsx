@@ -3,23 +3,20 @@ import React, { useState } from "react";
 import { Radio, RadioGroup } from "@/components";
 
 function RadioDemo() {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState<string>("1");
+
+  const handleChange = (value: string | undefined) => {
+    if (value) {
+      setValue(value);
+    }
+  };
 
   return (
     <>
       {/* Radio Group*/}
-      <RadioGroup
-        value={value}
-        onChange={(v) => {
-          if (v) {
-            setValue(v);
-          }
-        }}
-      >
+      <RadioGroup value={value} onChange={handleChange}>
         <Radio value="1">Option 1</Radio>
-        <Radio value="2" checked>
-          Option 2
-        </Radio>
+        <Radio value="2">Option 2</Radio>
         <Radio value="3">Option 3</Radio>
       </RadioGroup>
       <br />
