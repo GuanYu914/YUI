@@ -1,21 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, {
   Children,
   cloneElement,
   isValidElement,
   ReactElement,
 } from "react";
-import { RadioProps } from "../Radio";
 
-interface OptionGroup<T> {
+import { RadioProps } from "../Radio";
+import { CheckboxProps } from "../Checkbox";
+
+interface OptionGroupProps<T> {
   className?: string;
   disabled?: boolean;
-  value?: T;
-  children?: ReactElement<RadioProps<T>>[];
+  value?: T | T[];
+  children?: ReactElement<RadioProps<T> | CheckboxProps<T>>[];
   onChange?: (value: T | undefined) => void;
 }
 
-function OptionGroup<K>(props: OptionGroup<K>) {
+function OptionGroup<K>(props: OptionGroupProps<K>) {
   const {
     className = "",
     disabled = false,
@@ -24,7 +25,10 @@ function OptionGroup<K>(props: OptionGroup<K>) {
     onChange = null,
   } = props;
 
-  const handleChange = (value: any) => {
+  const deepEqual = (a: K | undefined, b: K | undefined) =>
+    JSON.stringify(a) === JSON.stringify(b);
+
+  const handleChange = (value: K | undefined) => {
     if (onChange) {
       onChange(value);
     }
@@ -34,13 +38,22 @@ function OptionGroup<K>(props: OptionGroup<K>) {
     <div className={className}>
       {Children.map(children, (child) => {
         if (isValidElement(child)) {
+          if (Array.isArray(value)) {
+            return cloneElement(child, {
+              ...child.props,
+              checked: child.props.value
+                ? value.some((el) => deepEqual(el, child.props.value))
+                : false,
+              disabled,
+              onChange: () => handleChange(child.props.value),
+            });
+          }
+
           return cloneElement(child, {
             ...child.props,
-            mode: "group",
-            checked: child.props.value === value,
+            checked: deepEqual(value, child.props.value),
             disabled,
-            groupValue: value,
-            onChange: handleChange,
+            onChange: () => handleChange(child.props.value),
           });
         }
       })}

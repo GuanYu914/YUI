@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import OptionGroup from "./OptionGroup";
 
@@ -9,8 +10,7 @@ export interface OptionProps {
   inputType: "radio" | "checkbox";
   checked?: boolean;
   disabled?: boolean;
-  onChangeInput?: () => void;
-  onClickLabel?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
 }
 
@@ -20,36 +20,31 @@ function Option(props: OptionProps) {
     inputClassName = "",
     labelClassName = "",
     inputType = "radio",
-    checked = false,
+    checked = undefined,
     disabled = false,
-    onChangeInput = null,
-    onClickLabel = null,
+    onChange = null,
     children = null,
   } = props;
 
-  const handleInputChange = () => {
-    if (onChangeInput) {
-      onChangeInput();
-    }
-  };
+  const id = `option-${uuidv4()}`;
 
-  const handleClickLabel = () => {
-    if (onClickLabel) {
-      onClickLabel();
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e);
     }
   };
 
   return (
     <div className="flex items-center gap-2">
       <input
-        id="option"
+        id={id}
         className={`${className} ${inputClassName}`}
         checked={checked}
         disabled={disabled}
         type={inputType}
         onChange={handleInputChange}
       />
-      <label className={labelClassName} onClick={handleClickLabel}>
+      <label htmlFor={id} className={labelClassName}>
         {children}
       </label>
     </div>
