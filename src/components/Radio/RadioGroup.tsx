@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ReactElement } from "react";
 
 import { OptionGroup } from "../Option";
@@ -21,7 +20,7 @@ function RadioGroup<K>(props: RadioGroupProps<K>) {
     onChange = null,
   } = props;
 
-  const handleChange = (value: any) => {
+  const handleChange = (value: K | undefined) => {
     if (onChange) {
       onChange(value);
     }

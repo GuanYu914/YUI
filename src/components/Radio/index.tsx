@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 
 import Option from "../Option";
 import RadioGroup from "./RadioGroup";
 
 export interface RadioProps<T> {
   className?: string;
-  mode?: "default" | "group";
   checked?: boolean;
   disabled?: boolean;
-  groupValue?: any;
   value?: T;
   children?: React.ReactNode;
   onChange?: (value: T | undefined) => void;
@@ -18,16 +15,12 @@ export interface RadioProps<T> {
 function Radio<K>(props: RadioProps<K>) {
   const {
     className = "",
-    mode = "default",
-    checked = false,
+    checked = undefined,
     disabled = false,
-    groupValue,
     value = undefined,
     children = null,
     onChange = null,
   } = props;
-
-  const [_checked, _setChecked] = useState(checked);
 
   const inputClassName = useMemo(() => {
     let styles =
@@ -52,41 +45,13 @@ function Radio<K>(props: RadioProps<K>) {
     return styles;
   }, [disabled]);
 
-  const handleInputChange = () => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) return;
 
-    _setChecked(!_checked);
-
-    if (onChange) {
+    if (e.target.checked && onChange) {
       onChange(value);
     }
   };
-
-  const handleClickLabel = () => {
-    if (disabled) return;
-    if (_checked) return;
-
-    _setChecked(!_checked);
-
-    if (onChange) {
-      onChange(value);
-    }
-  };
-
-  useEffect(() => {
-    _setChecked(checked);
-  }, [checked]);
-
-  // NOTE: 如果是 group 模式，且 groupValue 沒有值，則取消選取
-  // NOTE: 如果是 group 模式，且 groupValue 有值，則檢查是否與 value 相同，若不同則取消選取
-  useEffect(() => {
-    if (mode === "group" && !groupValue) {
-      _setChecked(false);
-    }
-    if (mode === "group" && groupValue !== value) {
-      _setChecked(false);
-    }
-  }, [_checked]);
 
   return (
     <Option
@@ -94,10 +59,9 @@ function Radio<K>(props: RadioProps<K>) {
       inputClassName={inputClassName}
       labelClassName={labelClassName}
       inputType="radio"
-      checked={_checked}
+      checked={checked}
       disabled={disabled}
-      onChangeInput={handleInputChange}
-      onClickLabel={handleClickLabel}
+      onChange={handleInputChange}
     >
       {children}
     </Option>
