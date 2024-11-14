@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
 
 import Option from "../Option";
-import RadioGroup from "./RadioGroup";
+import CheckboxGroup from "./CheckboxGroup";
 
-export interface RadioProps<T> {
+export interface CheckboxProps<T> {
   className?: string;
   checked?: boolean;
   disabled?: boolean;
@@ -12,7 +12,7 @@ export interface RadioProps<T> {
   onChange?: (value: T | undefined) => void;
 }
 
-function Radio<K>(props: RadioProps<K>) {
+function Checkbox<K>(props: CheckboxProps<K>) {
   const {
     className = "",
     checked = undefined,
@@ -24,7 +24,7 @@ function Radio<K>(props: RadioProps<K>) {
 
   const inputClassName = useMemo(() => {
     let styles =
-      "appearance-none w-5 h-5 border-2 border-secondary rounded-full cursor-pointer checked:border-4 checked:border-primary hover:border-primary transition-colors duration-300 ";
+      "appearance-none w-5 h-5 border-2 border-secondary cursor-pointer checked:border-4 checked:border-primary hover:border-primary transition-colors duration-300 ";
 
     if (disabled) {
       styles = styles.concat(
@@ -45,10 +45,10 @@ function Radio<K>(props: RadioProps<K>) {
     return styles;
   }, [disabled]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = () => {
     if (disabled) return;
 
-    if (e.target.checked && onChange) {
+    if (onChange) {
       onChange(value);
     }
   };
@@ -58,7 +58,7 @@ function Radio<K>(props: RadioProps<K>) {
       className={className}
       inputClassName={inputClassName}
       labelClassName={labelClassName}
-      inputType="radio"
+      inputType="checkbox"
       checked={checked}
       disabled={disabled}
       onChange={handleInputChange}
@@ -68,5 +68,5 @@ function Radio<K>(props: RadioProps<K>) {
   );
 }
 
-export default Radio;
-export { RadioGroup };
+export default Checkbox;
+export { CheckboxGroup };

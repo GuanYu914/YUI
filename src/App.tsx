@@ -1,9 +1,13 @@
-import React from "react";
-
-import { ButtonDemo, SwitchDemo, RadioDemo } from "@/demo";
+import { RadioDemo, CheckboxDemo } from "@/demo";
 
 function App() {
-  return <RadioDemo />;
+  return (
+    <>
+      <RadioDemo />
+      <br />
+      <CheckboxDemo />
+    </>
+  );
 }
 
 export default App;

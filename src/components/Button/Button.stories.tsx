@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import react_icon from "@/assets/react.svg";
 import flower_icon from "@/assets/flower-svgrepo-com.svg";
 
 import Button from ".";

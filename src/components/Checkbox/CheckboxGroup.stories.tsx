@@ -6,7 +6,7 @@ import bear_icon from "@/assets/bear-carnivore-svgrepo-com.svg";
 import puppy_icon from "@/assets/carnivore-cartoon-3-svgrepo-com.svg";
 import pizza_icon from "@/assets/pizza-slice-svgrepo-com.svg";
 
-import Radio, { RadioGroup } from ".";
+import Checkbox, { CheckboxGroup } from ".";
 
 const supportIcons = {
   "flower icon": (
@@ -21,20 +21,20 @@ const supportIcons = {
   ),
 };
 
-const meta: Meta<typeof RadioGroup> = {
-  component: RadioGroup,
+const meta: Meta<typeof CheckboxGroup> = {
+  component: CheckboxGroup,
 };
 
-type Story = StoryObj<typeof RadioGroup>;
+type Story = StoryObj<typeof CheckboxGroup>;
 
-export const SingleChoice: Story = {
-  name: "single choice",
+export const MultipleChoice: Story = {
+  name: "multiple choice",
   args: {
     onChange: fn(),
     children: [
-      <Radio value="1">選項1{supportIcons["flower icon"]}</Radio>,
-      <Radio value="2">選項2{supportIcons["puppy icon"]}</Radio>,
-      <Radio value="3">選項3{supportIcons["bear icon"]}</Radio>,
+      <Checkbox value="1">選項1{supportIcons["flower icon"]}</Checkbox>,
+      <Checkbox value="2">選項2{supportIcons["puppy icon"]}</Checkbox>,
+      <Checkbox value="3">選項3{supportIcons["bear icon"]}</Checkbox>,
     ],
   },
 };
