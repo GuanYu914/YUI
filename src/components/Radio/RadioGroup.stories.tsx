@@ -30,7 +30,6 @@ type Story = StoryObj<typeof RadioGroup>;
 export const SingleChoice: Story = {
   name: "single choice",
   args: {
-    value: "1",
     onChange: fn(),
     children: [
       <Radio value="1">選項1{supportIcons["flower icon"]}</Radio>,

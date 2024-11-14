@@ -39,9 +39,7 @@ type Story = StoryObj<typeof Radio>;
 export const Default: Story = {
   name: "default",
   args: {
-    className: "",
-    checked: false,
-    disabled: false,
+    value: "default",
     children: "default radio🥳",
     onChange: fn(),
   },
@@ -50,9 +48,7 @@ export const Default: Story = {
 export const Checked: Story = {
   name: "checked",
   args: {
-    className: "",
     checked: true,
-    disabled: false,
     children: "checked radio🥳",
     onChange: fn(),
   },
@@ -61,8 +57,6 @@ export const Checked: Story = {
 export const Disabled: Story = {
   name: "disabled",
   args: {
-    className: "",
-    checked: false,
     disabled: true,
     children: "disabled radio🥳",
     onChange: fn(),
@@ -72,10 +66,8 @@ export const Disabled: Story = {
 export const Label: Story = {
   name: "label",
   args: {
-    className: "",
-    checked: false,
-    disabled: false,
-    children: supportIcons["pizza icon"],
+    value: "pizza selected",
+    children: "pizza icon",
     onChange: fn(),
   },
 };
