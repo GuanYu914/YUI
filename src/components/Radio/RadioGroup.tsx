@@ -1,10 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactElement,
-} from "react";
+import { ReactElement } from "react";
+
+import { OptionGroup } from "../Option";
 import { RadioProps } from ".";
 
 interface RadioGroupProps<T> {
@@ -20,31 +16,24 @@ function RadioGroup<K>(props: RadioGroupProps<K>) {
     className = "",
     disabled = false,
     value = undefined,
-    children = null,
+    children = [],
     onChange = null,
   } = props;
 
-  const handleChange = (value: any) => {
+  const handleChange = (value: K | undefined) => {
     if (onChange) {
       onChange(value);
     }
   };
 
   return (
-    <div className={className}>
-      {Children.map(children, (child) => {
-        if (isValidElement(child)) {
-          return cloneElement(child, {
-            ...child.props,
-            mode: "group",
-            checked: child.props.value === value,
-            disabled,
-            groupValue: value,
-            onChange: handleChange,
-          });
-        }
-      })}
-    </div>
+    <OptionGroup
+      className={className}
+      disabled={disabled}
+      value={value}
+      children={children}
+      onChange={handleChange}
+    />
   );
 }
 

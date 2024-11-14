@@ -6,7 +6,7 @@ import bear_icon from "@/assets/bear-carnivore-svgrepo-com.svg";
 import puppy_icon from "@/assets/carnivore-cartoon-3-svgrepo-com.svg";
 import pizza_icon from "@/assets/pizza-slice-svgrepo-com.svg";
 
-import Radio from ".";
+import Checkbox from ".";
 
 const supportIcons = {
   "flower icon": (
@@ -21,8 +21,8 @@ const supportIcons = {
   ),
 };
 
-const meta: Meta<typeof Radio> = {
-  component: Radio,
+const meta: Meta<typeof Checkbox> = {
+  component: Checkbox,
   argTypes: {
     children: {
       options: Object.keys(supportIcons),
@@ -34,13 +34,13 @@ const meta: Meta<typeof Radio> = {
   },
 };
 
-type Story = StoryObj<typeof Radio>;
+type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
   name: "default",
   args: {
     value: "default",
-    children: "default radio🥳",
+    children: "default checkbox🥳",
     onChange: fn(),
   },
 };
@@ -49,7 +49,8 @@ export const Checked: Story = {
   name: "checked",
   args: {
     checked: true,
-    children: "checked radio🥳",
+    value: "checked",
+    children: "checked checkbox🥳",
     onChange: fn(),
   },
 };
@@ -58,7 +59,7 @@ export const Disabled: Story = {
   name: "disabled",
   args: {
     disabled: true,
-    children: "disabled radio🥳",
+    children: "disabled checkbox🥳",
     onChange: fn(),
   },
 };
