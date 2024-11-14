@@ -1,5 +1,3 @@
-import React from "react";
-
 export const THUMB_SIZE = 28;
 
 interface ThumbProps {

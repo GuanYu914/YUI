@@ -1,6 +1,4 @@
-import React from "react";
-
-import { ButtonDemo, SwitchDemo, RadioDemo, CheckboxDemo } from "@/demo";
+import { RadioDemo, CheckboxDemo } from "@/demo";
 
 function App() {
   return (

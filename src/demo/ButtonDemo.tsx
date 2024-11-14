@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Button } from "@/components";
 import react from "@/assets/react.svg";
 

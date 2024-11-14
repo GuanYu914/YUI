@@ -1,9 +1,4 @@
-import React, {
-  Children,
-  cloneElement,
-  isValidElement,
-  ReactElement,
-} from "react";
+import { Children, cloneElement, isValidElement, ReactElement } from "react";
 
 import { RadioProps } from "../Radio";
 import { CheckboxProps } from "../Checkbox";
