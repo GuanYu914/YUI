@@ -27,9 +27,13 @@ function CheckboxGroup<K>(props: CheckboxGroupProps<K>) {
     if (onChange) {
       const isExist = values?.some((el) => deepEqual(el, value));
 
-      return isExist
-        ? onChange(values?.filter((val) => !deepEqual(val, value)))
-        : onChange(values?.concat(value ?? []));
+      if (values?.length) {
+        return isExist
+          ? onChange(values?.filter((val) => !deepEqual(val, value)))
+          : onChange(values?.concat(value ?? []));
+      }
+
+      return onChange(value ? [value] : []);
     }
   };
 
